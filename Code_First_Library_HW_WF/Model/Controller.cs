@@ -87,9 +87,14 @@ namespace RelationshipEF_LoadingDb_18._07_WF.Model
             }
 
         }
-        public DbSet<Book> GetBooks()
+        public List<Book> GetBooks()
         {
-            return libraryContext.Books;
+            List<Book> books = new List<Book>();
+            using (libraryContext = new LibraryContext())
+            {
+                books =  libraryContext.Books.ToList();
+            }
+            return books;
         }
 
         public DbSet<Author> GetAuthors()

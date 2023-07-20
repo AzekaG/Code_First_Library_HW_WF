@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,15 +32,14 @@ namespace Code_First_Library_HW_WF
                                 //Задам по етому поводу вопрос на паре. Пробовал через контроллер , не получается( 
         {
             listBox1.Items.Clear();
-            using(controller.libraryContext = new LibraryContext()) 
-            {
+            
                 foreach (var el in controller.GetBooks())
                 {
                     
                     listBox1.Items.Add(el);
 
                 } 
-            }
+            
         }
 
         void AddBook(string name, int pages, string category, string author, string productionHouse)
