@@ -28,8 +28,7 @@ namespace Code_First_Library_HW_WF
 
         }
 
-        void iniListBox1()      //увы , по другому не получается создать подклдючение.
-                                //Задам по етому поводу вопрос на паре. Пробовал через контроллер , не получается( 
+        void iniListBox1()       
         {
             listBox1.Items.Clear();
             
