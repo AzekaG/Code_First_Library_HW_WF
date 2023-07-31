@@ -184,7 +184,7 @@ namespace RelationshipEF_LoadingDb_18._07_WF.Model
 
             }
         }
-
+        #region EagerLoading
         public Collection<Book> SearchBookByName(string nameBook)
         {
             Collection<Book> bk = new Collection<Book>();
@@ -246,6 +246,70 @@ namespace RelationshipEF_LoadingDb_18._07_WF.Model
 
             return bk;
         }
+        #endregion EagerLoading
+
+        #region ExplicitLoading
+    
+
+        public Collection<Book> SearchBookByAuthor_2(string nameAuthor)
+        {
+            Collection<Book> bk = new Collection<Book>();   // коллекция , которую возвращаем в форму1
+            
+            using (libraryContext = new LibraryContext())
+            {
+                Author ath = libraryContext.Authors.Where(x=>x.Name == nameAuthor).FirstOrDefault();    //наш объект для свойства
+                if (ath != null)
+                {
+                    libraryContext.Entry(ath).Collection("Books").Load();   
+                    foreach (var book in ath.Books)   
+                    {
+
+                        bk.Add(book);
+                    }
+                }
+            }
+            return bk;
+        }
+
+
+        public Collection<Book> SearchBookByCategory_2(string nameCategory)
+        {
+            Collection<Book> bk = new Collection<Book>();
+           
+           
+            using (libraryContext = new LibraryContext())
+            {
+                Category ct = libraryContext.Categories.Where(c=>c.Name == nameCategory).FirstOrDefault();
+                if (ct != null)
+                {
+                    libraryContext.Entry(ct).Collection("Books").Load();
+                    foreach (var book in ct.Books)
+                    {
+                       
+                            bk.Add(book);
+                    }
+                }
+            }
+            return bk;
+        }
+
+
+        public Collection<Book> SearchBookByPublishHouse_2(string namePublishHouse)
+        {
+            Collection<Book> bk = new Collection<Book>();
+            ProductionHouse ph = libraryContext.ProductionHouse.Where(x=>x.Name == namePublishHouse).FirstOrDefault();
+            using (libraryContext = new LibraryContext())
+            {
+                foreach (var book in ph.Books)
+                {
+                    bk.Add(book);
+                }
+            }
+
+            return bk;
+        }
+        #endregion ExplicitLoading
+
 
     }
 }

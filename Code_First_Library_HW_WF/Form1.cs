@@ -123,7 +123,7 @@ namespace Code_First_Library_HW_WF
                 else if (data.ContainsKey("Category"))
                 {
                     searchText = data["Category"];
-                    foreach (var el in controller.SearchBookByCategory(searchText))
+                    foreach (var el in controller.SearchBookByCategory_2(searchText))
                     {
                         listBox1.Items.Add(el);
                     }
@@ -133,7 +133,7 @@ namespace Code_First_Library_HW_WF
                 else if (data.ContainsKey("Author"))
                 {
                     searchText = data["Author"];
-                    foreach (var el in controller.SearchBookByAuthor(searchText))
+                    foreach (var el in controller.SearchBookByAuthor_2(searchText))
                     {
                         listBox1.Items.Add(el);
                     }
